@@ -7,4 +7,4 @@ This App alllows you to view, insert, Update, Delete data into a SQL Relational 
 
 I have used SQL Database to store and manupulate data. I am also trying to connect using Json to the backend thru an API.
 
-                                                @develop by Bongani Klaas
+                                                @develop by Bongani Klaas!
