@@ -2,6 +2,7 @@ package com.example.bongani.mobiapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.view.View;
@@ -42,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public  boolean insertData( String name, String surname, String age)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-
+        // values
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_2, name);
         contentValues.put(COLUMN_3, surname);
@@ -52,5 +53,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return  false;
         else
             return true;
+    }
+
+    public Cursor getAllData()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+        return  res;
+    }
+
+    public boolean updateData(String id, String name, String surname, String age)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_1, id);
+        contentValues.put(COLUMN_2, name);
+        contentValues.put(COLUMN_3, surname);
+        contentValues.put(COLUMN_4, age);
+        db.update(TABLE_NAME, contentValues,"id = ?", new String []{id});
+
+        return  true;
+    }
+
+    public Integer deleteData( String id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+       return db.delete(TABLE_NAME, "ID = ?", new String[]{id});
     }
 }
